@@ -9,7 +9,7 @@ import ItemFooter from '@/components/ItemFooter.vue'
         
         <!--<img href="./../public/logo.png"/>-->
         <RouterLink to="/" class="menu-el">Home</RouterLink>
-        <RouterLink to="/list" class="menu-el">List</RouterLink>
+        <RouterLink to="/list/2" class="menu-el">List</RouterLink>
         <RouterLink to="/about" class="menu-el">About</RouterLink>
       </nav>
     </div>

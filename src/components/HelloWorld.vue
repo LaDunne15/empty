@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    Хело
+  <div>
+    {{this.id}} - тут
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
+    id: String
   }
 }
 </script>
