@@ -26,7 +26,7 @@
         name: this.name,
         age: this.age
       };
-      await axios.post('http://emp2.herokuapp.com/ora',params)
+      await axios.post('https://emp2.herokuapp.com/ora',params)
       .then(response => (this.name = response));
     
   }}
