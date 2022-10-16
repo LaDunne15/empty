@@ -1,30 +1,74 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import ItemFooter from '@/components/ItemFooter.vue'
+
+</script>
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<div>
+      <nav class="menu">
+        
+        <!--<img href="./../public/logo.png"/>-->
+        <RouterLink to="/" class="menu-el">Home</RouterLink>
+        <RouterLink to="/list" class="menu-el">List</RouterLink>
+        <RouterLink to="/about" class="menu-el">About</RouterLink>
+      </nav>
+    </div>
+
+  <RouterView class="content"/>
+  <ItemFooter class="footer"></ItemFooter>
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style scoped>
+.menu{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: stretch;
+  background-color: rgb(148,65,47);
+  padding: 10px 100px 10px 100px;
+}
+.menu-el{
+  font-size: 40px;
+  display: block;
   text-align: center;
-  color: #2c3e50;
+  margin: 5px;
+  border-radius: 5px;
+  flex-grow: 1;
+  background-color: rgb(184, 87, 68);
+  text-decoration:none;
+  border: 2px solid rgb(126, 61, 49);
+  color:white  
+}
+.menu-el:first-child{
+  flex-grow: 1.5;
+}
+.menu-el:hover{
+  background: repeating-linear-gradient(
+  -45deg,
+  rgb(184, 87, 68),
+  rgb(184, 87, 68) 10px,
+  rgb(204, 97, 76) 10px,
+  rgb(204, 97, 76) 20px
+);
 }
 
-nav {
-  padding: 30px;
+
+
+.content {
+  border-radius: 15px;
+  background-color: rgb(206, 206, 198);
+  padding: 15px;
+  min-height: 600px;
+  margin: 40px 100px 40px 100px;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.footer{
+  display: block;
+  background-color: #133d54;
+  bottom: 0px;
+  min-height: 100px;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 20px;
+  color: azure;
 }
 </style>
