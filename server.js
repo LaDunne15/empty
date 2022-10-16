@@ -25,10 +25,24 @@ app.use(require('cors')());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get("/ora", function(request, response){
-  // отправляем ответ
-  response.send("<h2>Привет Express!</h2>");
+app.post("/ora", function(req, res){
+  console.log(req.body.name)
+  console.log(req.body.age)
+  const user  = new User({
+    name: req.body.name,
+    age: req.body.age
+  });
+  user.save(function(err){
+    if(err) return console.log(err);
+    console.log("Сохранен объект", user);
 });
+  res.status(201).json(user);
+});
+
+
+
+
+
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
