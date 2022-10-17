@@ -1,5 +1,8 @@
+<script setup>
+import GetAllUsers from '@/components/GetAllUsers.vue'
+</script>
 <template>
-    <div>
-      <h1>This is an lists page</h1>
-    </div>
+  <div>
+    <GetAllUsers></GetAllUsers>
+  </div>
 </template>

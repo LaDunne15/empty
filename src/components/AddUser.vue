@@ -1,6 +1,6 @@
 <template>
     <div>
-        Сторінка
+        Додати користувача
 
         <input type="text" v-model="name" placeholder="Введіть Ім'я" required>
         <input type="number" v-model="age" placeholder="Введіть вік" required>
@@ -8,9 +8,8 @@
         {{name}}
 
     </div>
-  </template>
-  
-  <script>
+</template>
+<script>
   import axios from 'axios'
   export default {
     name: 'AddUser',
@@ -26,11 +25,10 @@
         name: this.name,
         age: this.age
       };
-      await axios.post('https://emp2.herokuapp.com/ora',params)
+      await axios.post('https://emp2.herokuapp.com/addUser',params)
       .then(response => (this.name = response));
     
   }}
-
   ,
   mounted() {
     /*axios
@@ -39,7 +37,8 @@
     */
   }
   }
-  </script>
-  <style scoped>
-  </style>
+</script>
+
+<style scoped>
+</style>
   

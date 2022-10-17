@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
-//import ListView from '../views/ListView.vue'
-import HelloWorld from '../components/HelloWorld.vue'
+import ListView from '../views/ListView.vue'
+//import HelloWorld from '../components/HelloWorld.vue'
 //const HW = { template: '<div>{{$route.params.id}}</div>'}
 const routes = [
   {
@@ -15,10 +15,16 @@ const routes = [
     name: 'about',
     component: AboutView
   },
+  /*
   {
     path: '/list/:id',
     component: HelloWorld,
     props: route => ({ id: route.params.id })
+  }*/
+  {
+    path: '/list',
+    name: 'list',
+    component: ListView
   }
 ]
 
