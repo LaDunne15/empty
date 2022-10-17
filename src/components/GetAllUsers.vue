@@ -49,7 +49,7 @@ methods: {
     },
     
     remove: async function(id){
-        await axios.delete('http://localhost:3000/removeUser/'+id).
+        await axios.delete('https://emp2.herokuapp.com/removeUser/'+id).
         then(response => {
             axios.get('https://emp2.herokuapp.com/getUsers')
             .then(response => {
