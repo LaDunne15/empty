@@ -5,7 +5,6 @@
         <input type="text" v-model="name" placeholder="Введіть Ім'я" required>
         <input type="number" v-model="age" placeholder="Введіть вік" required>
         <button type="button" v-on:click="send">Записати</button>
-        {{name}}
 
     </div>
 </template>
@@ -15,8 +14,8 @@
     name: 'AddUser',
     data() {
     return {
-        name: "",
-        age: 0
+      name: "",
+      age: 0
     }
   },
   methods: {
@@ -26,7 +25,11 @@
         age: this.age
       };
       await axios.post('https://emp2.herokuapp.com/addUser',params)
-      .then(response => (this.name = response));
+      .then(() => {
+        alert("Користувача додано")
+        this.name = "";
+        this.age = "";
+      });
     
   }}
   ,

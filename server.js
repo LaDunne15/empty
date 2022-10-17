@@ -34,12 +34,20 @@ app.post("/addUser", function(req, res){
   });
   res.status(201).json(user);
 });
-
 app.get("/getUsers", async function(req, res){
   const users = await User.find({});
   res.status(200).json({
     users
   });
+})
+app.delete("/removeUser/:id", async function(req, res){
+  const id = req.params.id;
+  User.findByIdAndDelete(id, function(err, doc){
+    if(err) return console.log(err);
+});
+res.status(200).json({
+  "msg":"Користувач видалений"
+});
 })
 
 

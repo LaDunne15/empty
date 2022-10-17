@@ -23,6 +23,12 @@
                     <td>
                         {{user.age}}
                     </td>
+                    <td>
+                        <button type="button" disabled v-on:click="send(user._id)">Вибрати</button>
+                    </td>
+                    <td>
+                        <button type="button" v-on:click="remove(user._id)">Видалити</button>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -38,7 +44,22 @@ export default {
     }
 },
 methods: {
+    send: function(id){
+        console.log(id)
+    },
     
+    remove: async function(id){
+        await axios.delete('http://localhost:3000/removeUser/'+id).
+        then(response => {
+            axios.get('https://emp2.herokuapp.com/getUsers')
+            .then(response => {
+                this.users = response.data.users
+                console.log(this.users)
+            });
+            alert(response.data.msg);
+        });
+        
+    }
 }
 ,
 mounted() {
