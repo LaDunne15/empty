@@ -29,7 +29,7 @@ export default {
                 name: this.user.name,
                 age: this.user.age
             };
-            await axios.put('http://localhost:3000/updateUser/'+this.id,params)
+            await axios.put('https://emp2.herokuapp.com/updateUser/'+this.id,params)
             .then(response => {
                 alert(response.data.msg)
             });
@@ -39,7 +39,7 @@ export default {
         }
     },
     mounted() {
-    axios.get('http://localhost:3000/getUser/'+this.id)
+    axios.get('https://emp2.herokuapp.com/getUser/'+this.id)
     .then(response => (this.user = response.data.user));
     }
 }
