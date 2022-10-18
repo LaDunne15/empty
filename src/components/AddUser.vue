@@ -1,11 +1,11 @@
 <template>
     <div>
         Додати користувача
-
+        <p>
         <input type="text" v-model="name" placeholder="Введіть Ім'я" required>
         <input type="number" v-model="age" placeholder="Введіть вік" required>
         <button type="button" v-on:click="send">Записати</button>
-
+        </p>
     </div>
 </template>
 <script>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        Список користувачів
         <div>
             <table border="1">
                 <tr>
@@ -24,7 +25,7 @@
                         {{user.age}}
                     </td>
                     <td>
-                        <button type="button" disabled v-on:click="send(user._id)">Вибрати</button>
+                        <button type="button" v-on:click="send(user._id)">Вибрати</button>
                     </td>
                     <td>
                         <button type="button" v-on:click="remove(user._id)">Видалити</button>
@@ -36,6 +37,7 @@
 </template>
 <script>
 import axios from 'axios'
+import router from '../router'
 export default {
     name: 'GetAllUsers',
     data() {
@@ -45,7 +47,7 @@ export default {
 },
 methods: {
     send: function(id){
-        console.log(id)
+        router.push({ name: 'editUser', params: { id } })
     },
     
     remove: async function(id){
@@ -54,7 +56,6 @@ methods: {
             axios.get('https://emp2.herokuapp.com/getUsers')
             .then(response => {
                 this.users = response.data.users
-                console.log(this.users)
             });
             alert(response.data.msg);
         });

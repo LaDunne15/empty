@@ -40,6 +40,13 @@ app.get("/getUsers", async function(req, res){
     users
   });
 })
+app.get("/getUser/:id", async function(req, res){
+  const id = req.params.id;
+  const user = await User.findById(id);
+  res.status(200).json({
+    user
+  });
+})
 app.delete("/removeUser/:id", async function(req, res){
   const id = req.params.id;
   User.findByIdAndDelete(id, function(err, doc){
@@ -48,6 +55,15 @@ app.delete("/removeUser/:id", async function(req, res){
 res.status(200).json({
   "msg":"Користувач видалений"
 });
+})
+app.put("/updateUser/:id", async function(req,res){
+  const id = req.params.id;
+  const name = req.body.name;
+  const age = req.body.age;
+  await User.findByIdAndUpdate(id, { name,age })
+  res.status(200).json({
+    "msg":"Змінено"
+  })
 })
 
 
