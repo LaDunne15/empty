@@ -104,34 +104,49 @@ app.get('/image2', async function(req, res) {
 
 
 app.post('/upload', (req, res) => {
-
   if (!req.files) {
-      return res.status(500).send({ msg: "file is not found" })
+      return res.status(500).send({
+          msg: "file is not found"
+      })
   }
   const myFile = req.files.file;
-  myFile.mv(`${__dirname}/uploads/${myFile.name}`, function (err) {
+  myFile.mv(`${__dirname}/uploads/${myFile.name}`, function(err) {
       if (err) {
           console.log(err)
-          return res.status(500).json({ msg: "Error occured" });
+          return res.status(500).json({
+              msg: "Error occured"
+          });
       }
+      const directory = `${__dirname}/uploads`;
+      fs.readdir(directory, (err, files) => {
+          if (err) throw err;
+
+          for (const file of files) {
+              fs.unlink(path.join(directory, file), (err) => {
+                  if (err) throw err;
+              });
+          }
+      });
       var obj = {
-        name: req.body.name,
-        desc: req.body.desc,
-        img: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/'+myFile.name)),
-            contentType: 'image/png'
-        }
-    }
-    Image.create(obj, (err, item) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.status(201).json({ msg: "Image created" });
-        }
-    });
+          name: req.body.name,
+          desc: req.body.desc,
+          img: {
+              data: fs.readFileSync(path.join(__dirname + '/uploads/' + myFile.name)),
+              contentType: 'image/png'
+          }
+      }
+      Image.create(obj, (err, item) => {
+          if (err) {
+              console.log(err);
+          } else {
+
+              res.status(201).json({
+                  msg: "Image created"
+              });
+          }
+      });
   });
-  
+
 })
 
 

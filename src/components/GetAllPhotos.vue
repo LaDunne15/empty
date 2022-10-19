@@ -24,6 +24,7 @@
 </template>
 <script>
 import axios from 'axios'
+import router from '../router'
 export default {
     name: 'GetAllPhotos',
     data() {
@@ -46,10 +47,9 @@ methods: {
         formData.append('file', this.file);
         axios.post('https://emp2.herokuapp.com/upload',formData)
         .then( async function (response) {
-    //handle success
+        
     console.log(response);
-    await axios.get('https://emp2.herokuapp.com/image2')
-    .then(response => (this.imgs = response.data.imgs.reverse()));
+        router.go()
     })
     .catch(function (response) {
     //handle error
