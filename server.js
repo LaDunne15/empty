@@ -1,21 +1,48 @@
 const express = require('express');
-const serveStatic = require("serve-static")
+const serveStatic = require("serve-static");
+const fileUpload = require('express-fileupload');
 const path = require('path');
+const fs = require('fs');
+const formidable = require('formidable');
+require('dotenv/config');
 
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+mongoose.connect("mongodb+srv://test_user:test_pass@cluster0.mxosg.mongodb.net/empty_db?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true })
+.then(()=> console.log("MongoDB connected"))
+.catch(error => console.log(error));
   
 const userScheme = new Schema({
     name: String,
     age: Number});
 
-mongoose.connect("mongodb+srv://test_user:test_pass@cluster0.mxosg.mongodb.net/empty_db?retryWrites=true&w=majority", { useUnifiedTopology: true, useNewUrlParser: true })
-.then(()=> console.log("MongoDB connected"))
-.catch(error => console.log(error));
+const imageScheme = new mongoose.Schema({
+    name: String,
+    desc: String,
+    img:
+    {
+      data: Buffer,
+      contentType: String
+    }
+});
+
 const User = mongoose.model("User", userScheme);
+const Image = mongoose.model("Image", imageScheme);
 
-
+var multer = require('multer');
+  
+var storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+});
+  
+var upload = multer({ storage: storage, limits: { fieldSize: 2 * 1024 * 1024 } });
 
 
 app = express();
@@ -23,6 +50,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use(require('cors')());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(fileUpload());
+app.set("view engine", "ejs");
 
 app.post("/addUser", function(req, res){
   const user  = new User({
@@ -66,8 +95,44 @@ app.put("/updateUser/:id", async function(req,res){
   })
 })
 
+app.get('/image2', async function(req, res) {
+  const imgs = await Image.find({}).lean();
+  res.status(200).json({
+    imgs
+  });
+});
 
 
+app.post('/upload', (req, res) => {
+
+  if (!req.files) {
+      return res.status(500).send({ msg: "file is not found" })
+  }
+  const myFile = req.files.file;
+  myFile.mv(`${__dirname}/uploads/${myFile.name}`, function (err) {
+      if (err) {
+          console.log(err)
+          return res.status(500).send({ msg: "Error occured" });
+      }
+  });
+  var obj = {
+    name: req.body.name,
+    desc: req.body.desc,
+    img: {
+        data: fs.readFileSync(path.join(__dirname + '/uploads/'+myFile.name)),
+        contentType: 'image/png'
+    }
+}
+Image.create(obj, (err, item) => {
+    if (err) {
+        console.log(err);
+    }
+    else {
+        // item.save();
+        res.redirect('/image');
+    }
+});
+})
 
 
 
