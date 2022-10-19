@@ -1,12 +1,14 @@
 <template>
     <div>
-        <p><button v-on:click="back">&#8592;Назад</button></p>
-        Редагувати користувача
-        <p>
-        <input type="text" v-model="user.name" placeholder="Введіть Ім'я" required>
-        <input type="number" v-model="user.age" placeholder="Введіть вік" required>
-        <button type="button" v-on:click="edit">Змінити</button>
-        </p>
+        <div class="back"><button v-on:click="back">&#8592;Назад</button></div>
+        <div class="addEnt">  
+            <span>Редагувати користувача</span>
+            <span>Ім'я:</span>
+            <input type="text" v-model="user.name" placeholder="Введіть Ім'я" required>
+            <span>Вік:</span>
+            <input type="number" v-model="user.age" placeholder="Введіть вік" required>
+            <button type="button" v-on:click="edit">Змінити</button>
+        </div>
     </div>
 </template>
 
@@ -30,8 +32,8 @@ export default {
                 age: this.user.age
             };
             await axios.put('https://emp2.herokuapp.com/updateUser/'+this.id,params)
-            .then(response => {
-                alert(response.data.msg)
+            .then(() => {
+                router.push('/list')
             });
         },
         back: function() {
@@ -45,4 +47,21 @@ export default {
 }
 </script>
 <style scoped>
+.back{
+    position: absolute;
+}
+.back>button{
+    position: relative;
+    left: -50%;
+    width: 65px;
+    height: 65px;
+    border-radius: 65px;
+    background: repeating-linear-gradient(
+    -45deg,
+    rgb(156, 156, 1),
+    rgb(136, 136, 2) 10px,
+    rgb(156, 156, 1) 10px,
+    rgb(136, 136, 2) 20px
+    );
+}
 </style>

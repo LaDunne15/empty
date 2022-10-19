@@ -1,8 +1,7 @@
 <script setup>
-import AddUser from '@/components/AddUser.vue'
 </script>
 <template>
   <div>
-    <AddUser></AddUser>
+    Нажми "Користувачі" або "Фото"
   </div>
 </template>

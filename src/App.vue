@@ -8,9 +8,9 @@ import ItemFooter from '@/components/ItemFooter.vue'
       <nav class="menu">
         
         <!--<img href="./../public/logo.png"/>-->
-        <RouterLink to="/" class="menu-el">Home</RouterLink>
-        <RouterLink to="/list" class="menu-el">List</RouterLink>
-        <RouterLink to="/about" class="menu-el">About</RouterLink>
+        <RouterLink to="/" class="menu-el">empty</RouterLink>
+        <RouterLink to="/list" class="menu-el">Користувачі</RouterLink>
+        <RouterLink to="/about" class="menu-el">Фото</RouterLink>
       </nav>
     </div>
 
@@ -27,7 +27,7 @@ import ItemFooter from '@/components/ItemFooter.vue'
   padding: 10px 100px 10px 100px;
 }
 .menu-el{
-  font-size: 40px;
+  font-size: 20px;
   display: block;
   text-align: center;
   margin: 5px;
@@ -58,7 +58,7 @@ import ItemFooter from '@/components/ItemFooter.vue'
   background-color: rgb(206, 206, 198);
   padding: 15px;
   min-height: 600px;
-  margin: 40px 100px 40px 100px;
+  margin: 20px 40px;
 }
 
 .footer{
