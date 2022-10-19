@@ -112,26 +112,26 @@ app.post('/upload', (req, res) => {
   myFile.mv(`${__dirname}/uploads/${myFile.name}`, function (err) {
       if (err) {
           console.log(err)
-          return res.status(500).send({ msg: "Error occured" });
+          return res.status(500).json({ msg: "Error occured" });
       }
+      var obj = {
+        name: req.body.name,
+        desc: req.body.desc,
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/'+myFile.name)),
+            contentType: 'image/png'
+        }
+    }
+    Image.create(obj, (err, item) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(201).json({ msg: "Image created" });
+        }
+    });
   });
-  var obj = {
-    name: req.body.name,
-    desc: req.body.desc,
-    img: {
-        data: fs.readFileSync(path.join(__dirname + '/uploads/'+myFile.name)),
-        contentType: 'image/png'
-    }
-}
-Image.create(obj, (err, item) => {
-    if (err) {
-        console.log(err);
-    }
-    else {
-        // item.save();
-        res.redirect('/image');
-    }
-});
+  
 })
 
 

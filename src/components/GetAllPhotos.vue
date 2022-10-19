@@ -40,7 +40,7 @@ methods: {
         formData.append('name', this.name);
         formData.append('desc', this.desc);
         formData.append('file', this.file);
-        axios.post('https://emp2.herokuapp.com/upload',formData)
+        axios.post('http://localhost:3000/upload',formData)
         .then(function (response) {
     //handle success
     console.log(response);
@@ -61,6 +61,6 @@ mounted() {
 
 <style scoped>
 .image{
-    height: 100px;
+    width:100%;
 }
 </style>
