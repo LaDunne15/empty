@@ -45,7 +45,7 @@ methods: {
         formData.append('name', this.name);
         formData.append('desc', this.desc);
         formData.append('file', this.file);
-        axios.post('http://localhost:3000/upload',formData)
+        axios.post('https://emp2.herokuapp.com/upload',formData)
         .then(function (response) {
     console.log(response);
         router.go()
