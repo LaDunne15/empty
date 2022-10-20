@@ -104,12 +104,18 @@ app.get('/image2', async function(req, res) {
 
 
 app.post('/upload', (req, res) => {
+  
+  const directory = `${__dirname}/uploads`;
+  if (!fs.existsSync(directory)){
+    fs.mkdirSync(directory);
+}
   if (!req.files) {
       return res.status(500).send({
           msg: "file is not found"
       })
   }
   const myFile = req.files.file;
+
   myFile.mv(`${__dirname}/uploads/${myFile.name}`, function(err) {
       if (err) {
           console.log(err)
@@ -117,7 +123,6 @@ app.post('/upload', (req, res) => {
               msg: "Error occured"
           });
       }
-      const directory = `${__dirname}/uploads`;
       fs.readdir(directory, (err, files) => {
           if (err) throw err;
 
