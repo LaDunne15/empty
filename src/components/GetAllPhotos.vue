@@ -15,7 +15,8 @@
 
         
         <div v-for="img in imgs" :key="img._id" class="imagediv">
-            <button disabled>Редагувати</button>
+            <button v-on:click="edit(img._id)">Редагувати</button>
+            <button v-on:click="remove(img._id)">Видалити</button>
             <img class="image" :src="'data:'+img.img.contentType+';base64,'+img.img.data">
             <span>{{img.name}}</span>
             <p>{{img.desc}}</p>
@@ -54,6 +55,16 @@ methods: {
     //handle error
     console.log(response);
     });
+    },
+    edit: function(id){
+        router.push({ name: 'editPhoto', params: { id } })
+    },
+    remove: async function(id){
+        await axios.delete('http://localhost:3000/removeImage/'+id).
+        then(() => {
+            router.go()
+        });
+        
     }
 }
 ,
@@ -71,9 +82,10 @@ mounted() {
 
 .imagediv{
     border: 5px dashed rgb(190, 190, 182);
-    margin-bottom: 15px;
+    margin: 15px auto;
     border-radius: 15px;
     position: relative;
+    max-width: 500px;
 }
 
 .imagediv>img{
@@ -90,11 +102,18 @@ mounted() {
     font-size: 15px;
 }
 
-.imagediv>button{
+.imagediv>button:first-child{
     position: absolute;
     top: 10px;
     left: 100%;
     transform: translate(-90px);
     opacity: 0.7;
+    width: 90px;
+}
+.imagediv>button{
+    position: absolute;
+    top: 10px;
+    opacity: 0.7;
+    width: 90px;
 }
 </style>

@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import ListView from '../views/ListView.vue'
 import EditUser from '../components/EditUser.vue'
+import EditPhoto from '../components/EditPhoto.vue'
 //const HW = { template: '<div>{{$route.params.id}}</div>'}
 const routes = [
   {
@@ -24,6 +25,12 @@ const routes = [
     path: '/editUser/:id',
     name: 'editUser',
     component: EditUser,
+    props: route => ({ id: route.params.id})
+  },
+  {
+    path: '/editPhoto/:id',
+    name: 'editPhoto',
+    component: EditPhoto,
     props: route => ({ id: route.params.id})
   }
 ]

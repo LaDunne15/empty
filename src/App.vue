@@ -58,7 +58,8 @@ import ItemFooter from '@/components/ItemFooter.vue'
   background-color: rgb(206, 206, 198);
   padding: 15px;
   min-height: 600px;
-  margin: 20px 40px;
+  margin: 20px auto;
+  max-width: 600px;
 }
 
 .footer{
