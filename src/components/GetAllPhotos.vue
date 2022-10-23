@@ -60,7 +60,7 @@ methods: {
         router.push({ name: 'editPhoto', params: { id } })
     },
     remove: async function(id){
-        await axios.delete('http://localhost:3000/removeImage/'+id).
+        await axios.delete('https://emp2.herokuapp.com/removeImage/'+id).
         then(() => {
             router.go()
         });

@@ -35,7 +35,7 @@ export default {
                 name: this.photo.name,
                 desc: this.photo.desc
             };
-            await axios.put('http://localhost:3000/updateImage/'+this.id,params)
+            await axios.put('https://emp2.herokuapp.com/updateImage/'+this.id,params)
             .then(() => {
                 router.push('/about')
             });
@@ -45,7 +45,7 @@ export default {
         }
     },
     mounted() {
-    axios.get('http://localhost:3000/getImage/'+this.id)
+    axios.get('https://emp2.herokuapp.com/getImage/'+this.id)
     .then(response => (this.photo = response.data.img));
     }
 }
